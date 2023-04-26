@@ -1,58 +1,51 @@
-const screen1 = document.querySelector(".screen1")
-const screen2 = document.querySelector(".screen2")
-const fortuneCookie = document.querySelector("#fortuneCookie")
-const tryAgain = document.querySelector("#tryAgain")
+const screen1 = document.querySelector(".screen1");
+const screen2 = document.querySelector(".screen2");
+const wholeCookie = document.querySelector("#wholeCookie");
+const tryAgain = document.querySelector("#tryAgain");
 
-const fortune = [
-  "O aprendizado é como o horizonte: não há limites.",
-  "Não há que ser forte, há que ser flexível.",
-  "Limitações são fronteiras criadas apenas pela nossa mente.",
+const phrases = [
+  "É parte da cura o desejo de ser curado.",
   "O cão não ladra por valentia e sim por medo.",
-  "Procure acender uma vela em vez de amaldiçoar a escuridão.",
+  "O que me preocupa não é o grito dos maus. É o silêncio dos bons.",
   "A palavra é prata, o silêncio é ouro.",
-  "Lembre-se de que grandes realizações e grandes amores envolvem grandes riscos.",
-  "Um pouco de perfume sempre fica nas mãos de quem oferece flores.",
-  "O homem só envelhece quando os lamentos substituem seus sonhos.",
   "A persistência realiza o impossível.",
-  "Se alguém está tão cansado que não possa te dar um sorriso, deixa-lhe o teu.",
-]
+  "O sucesso é ir de fracasso em fracasso sem perder o entusiasmo.",
+  "O homem só envelhece quando os lamentos substituem seus sonhos.",
+  "Um pouco de perfume sempre fica nas mãos de quem oferece flores.",
+  "Procure acender uma vela em vez de amaldiçoar a escuridão.",
+  "O que me preocupa não é o grito dos maus. É o silêncio dos bons.",
+];
 
-
-
-
-fortuneCookie.addEventListener('click', handleTryClick)
-tryAgain.addEventListener('click', handleResetClick)
-document.addEventListener('keydown', function (e) {
-  if (e.key == 'Enter' && screen2.classList.contains('hide')) {
-    handleTryClick()
-  } else if (e.key == 'Enter' && screen1.classList.contains('hide')) {
-    handleResetClick()
+// Events
+wholeCookie.addEventListener("click", handleTryClick);
+tryAgain.addEventListener("click", handleResetClick);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && screen2.classList.contains("hide")) {
+    handleTryClick();
+  } else if (e.key === "Enter" && screen1.classList.contains("hide")) {
+    handleResetClick();
   }
+});
 
-
-})
-
-
-
-function handleTryClick(event) {
-  toggleScreen()
-  pickFortune()
-
+// Callback function to execute other functions
+function handleTryClick() {
+  toggleScreens();
+  selectRandomPhrase();
 }
 
 function handleResetClick() {
-  toggleScreen()
+  toggleScreens();
 }
 
-
-function pickFortune() {
-  let allFortunes = fortune.length
-  let randomNumber = Math.floor(Math.random() * allFortunes)
-  screen2.querySelector("h2").innerText = `${fortune[randomNumber]}`
+// Select a random phrase from the array and display it on screen2
+function selectRandomPhrase() {
+  const numberOfPhrases = phrases.length;
+  const randomIndex = Math.floor(Math.random() * numberOfPhrases);
+  screen2.querySelector("h2").innerText = phrases[randomIndex];
 }
 
-
-function toggleScreen() {
-  screen2.classList.toggle("hide")
-  screen1.classList.toggle("hide")
+// Toggle between screen1 and screen2
+function toggleScreens() {
+  screen2.classList.toggle("hide");
+  screen1.classList.toggle("hide");
 }
